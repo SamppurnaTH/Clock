@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="greeting" aria-label="Greeting Message">
+            <h1 id="greeting-message">Welcome, Venu Thota!</h1>
+            <p>Your hybrid clock is ready.</p>
+        </div>
+        
+        <div id="analog-clock" class="clock analog hidden" aria-label="Analog Clock">
+            <div class="number number1" aria-label="Number 1">1</div>
+            <div class="number number2" aria-label="Number 2">2</div>
+            <div class="number number3" aria-label="Number 3">3</div>
+            <div class="number number4" aria-label="Number 4">4</div>
+            <div class="number number5" aria-label="Number 5">5</div>
+            <div class="number number6" aria-label="Number 6">6</div>
+            <div class="number number7" aria-label="Number 7">7</div>
+            <div class="number number8" aria-label="Number 8">8</div>
+            <div class="number number9" aria-label="Number 9">9</div>
+            <div class="number number10" aria-label="Number 10">10</div>
+            <div class="number number11" aria-label="Number 11">11</div>
+            <div class="number number12" aria-label="Number 12">12</div>
+            
+            <div class="center" aria-label="Center of Clock"></div>
+            <div class="hand hour-hand" aria-label="Hour Hand"></div>
+            <div class="hand minute-hand" aria-label="Minute Hand"></div>
+            <div class="hand second-hand" aria-label="Second Hand"></div>
+        </div>
+        
+        <div id="digital-clock" class="clock digital" aria-label="Digital Clock">
+            <div id="time"></div>
+        </div>
+        
+        <div id="time-format-section" aria-label="Time Format Options">
+            <label for="time-format">Choose Time Format:</label>
+            <select id="time-format">
+                <option value="12hr" selected>12-Hour</option>
+                <option value="24hr">24-Hour</option>
+            </select>
+        </div>
+        
+        <div id="location-section" aria-label="Location Input">
+            <label for="location">Enter Location:</label>
+            <input type="text" id="location" placeholder="e.g., India" aria-label="Location Input Field" />
+            <button id="update-location">Update Location</button>
+        </div>
+        
+        <div id="date-weather" aria-label="Date and Weather Information">
+            <p id="date"></p>
+            <p id="weather">Weather: <span id="weather-status">Loading...</span></p>
+        </div>
+        
+        <button id="mode-toggle" class="toggle-btn" aria-label="Switch between dark and light modes" role="button">Switch Mode</button>
+        
+        <button id="clock-toggle" class="toggle-btn" aria-label="Switch between digital and analog clocks" role="button">Toggle Clock Type</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
