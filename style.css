@@ -64,7 +64,6 @@ body.dark-mode {
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.8);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  /* Remove rotating animation */
 }
 
 .analog.dark-mode {
@@ -87,23 +86,23 @@ body.dark-mode {
 }
 
 .number.dark-mode {
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
-.number12 { top: 5%; left: 50%; transform: translateX(-50%); } /* 12 is at the top */
-.number1  { top: 14%; left: 73%; transform: translate(-50%, -50%); } /* 30 degrees */
-.number2  { top: 30%; left: 85%; transform: translate(-50%, -50%); } /* 60 degrees */
-.number3  { top: 50%; left: 90%; transform: translate(-50%, -50%); } /* 90 degrees (right) */
-.number4  { top: 70%; left: 85%; transform: translate(-50%, -50%); } /* 120 degrees */
-.number5  { top: 85%; left: 73%; transform: translate(-50%, -50%); } /* 150 degrees */
-.number6  { top: 90%; left: 50%; transform: translateX(-50%); } /* 180 degrees (bottom) */
-.number7  { top: 85%; left: 27%; transform: translate(-50%, -50%); } /* 210 degrees */
-.number8  { top: 70%; left: 15%; transform: translate(-50%, -50%); } /* 240 degrees */
-.number9  { top: 50%; left: 10%; transform: translate(-50%, -50%); } /* 270 degrees (left) */
-.number10 { top: 30%; left: 15%; transform: translate(-50%, -50%); } /* 300 degrees */
-.number11 { top: 14%; left: 27%; transform: translate(-50%, -50%); } /* 330 degrees */
-
+/* Positioning numbers around the clock face */
+.number12 { top: 5%; left: 50%; transform: translateX(-50%); }
+.number1  { top: 14%; left: 73%; transform: translate(-50%, -50%); }
+.number2  { top: 30%; left: 85%; transform: translate(-50%, -50%); }
+.number3  { top: 50%; left: 90%; transform: translate(-50%, -50%); }
+.number4  { top: 70%; left: 85%; transform: translate(-50%, -50%); }
+.number5  { top: 85%; left: 73%; transform: translate(-50%, -50%); }
+.number6  { top: 90%; left: 50%; transform: translateX(-50%); }
+.number7  { top: 85%; left: 27%; transform: translate(-50%, -50%); }
+.number8  { top: 70%; left: 15%; transform: translate(-50%, -50%); }
+.number9  { top: 50%; left: 10%; transform: translate(-50%, -50%); }
+.number10 { top: 30%; left: 15%; transform: translate(-50%, -50%); }
+.number11 { top: 14%; left: 27%; transform: translate(-50%, -50%); }
 
 .center {
   width: 15px;
@@ -133,12 +132,10 @@ body.dark-mode {
 .hour-hand {
   height: 6px;
   width: 30%;
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
 }
 
 .minute-hand {
   width: 45%;
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
 }
 
 .second-hand {
@@ -163,7 +160,7 @@ body.dark-mode {
 }
 
 .digital.dark-mode {
-  color: #ffffff;
+  color: #fff;
 }
 
 .hidden {
@@ -236,14 +233,11 @@ body.dark-mode {
 }
 
 @keyframes magic-glow {
-  0% {
+  0%, 100% {
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
   }
   50% {
     box-shadow: 0 0 20px rgba(0, 123, 255, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
   }
 }
 
@@ -261,9 +255,10 @@ body.dark-mode {
 
 #location-section button:hover {
   background-color: #218838;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 #location-section button:focus {
-  outline: 3px solid #28a745;
+  outline: 3px solid #ffbf47;
 }

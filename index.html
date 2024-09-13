@@ -14,61 +14,60 @@
         </div>
         
         <div id="analog-clock" class="clock analog hidden" aria-label="Analog Clock">
-            <div class="number number1" aria-label="Number 1">1</div>
-            <div class="number number2" aria-label="Number 2">2</div>
-            <div class="number number3" aria-label="Number 3">3</div>
-            <div class="number number4" aria-label="Number 4">4</div>
-            <div class="number number5" aria-label="Number 5">5</div>
-            <div class="number number6" aria-label="Number 6">6</div>
-            <div class="number number7" aria-label="Number 7">7</div>
-            <div class="number number8" aria-label="Number 8">8</div>
-            <div class="number number9" aria-label="Number 9">9</div>
-            <div class="number number10" aria-label="Number 10">10</div>
-            <div class="number number11" aria-label="Number 11">11</div>
-            <div class="number number12" aria-label="Number 12">12</div>
+            <div class="number number1">1</div>
+            <div class="number number2">2</div>
+            <div class="number number3">3</div>
+            <div class="number number4">4</div>
+            <div class="number number5">5</div>
+            <div class="number number6">6</div>
+            <div class="number number7">7</div>
+            <div class="number number8">8</div>
+            <div class="number number9">9</div>
+            <div class="number number10">10</div>
+            <div class="number number11">11</div>
+            <div class="number number12">12</div>
             
-            <div class="center" aria-label="Center of Clock"></div>
-            <div class="hand hour-hand" aria-label="Hour Hand"></div>
-            <div class="hand minute-hand" aria-label="Minute Hand"></div>
-            <div class="hand second-hand" aria-label="Second Hand"></div>
+            <div class="center"></div>
+            <div class="hand hour-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand second-hand"></div>
         </div>
         
         <div id="digital-clock" class="clock digital" aria-label="Digital Clock">
             <div id="time"></div>
         </div>
         
-        <div id="time-format-section" aria-label="Time Format Options">
+        <div id="time-format-section">
             <label for="time-format">Choose Time Format:</label>
-            <select id="time-format" aria-label="Time Format Selector">
+            <select id="time-format">
                 <option value="12hr" selected>12-Hour</option>
                 <option value="24hr">24-Hour</option>
             </select>
         </div>
         
-        <div id="timezone-section" aria-label="Time Zone Selector">
+        <div id="timezone-section">
             <label for="time-zone">Choose Time Zone:</label>
-            <select id="time-zone" aria-label="Time Zone Selector">
+            <select id="time-zone">
                 <option value="Asia/Kolkata" selected>Asia/Kolkata</option>
                 <option value="America/New_York">America/New_York</option>
                 <option value="Europe/London">Europe/London</option>
-                <!-- Add more time zones as needed -->
             </select>
         </div>
 
-        <div id="location-section" aria-label="Location Input">
+        <div id="location-section">
             <label for="location">Enter Location:</label>
-            <input type="text" id="location" placeholder="e.g., India" aria-label="Location Input Field" />
-            <button id="update-location" aria-label="Update Weather Location">Update Location</button>
+            <input type="text" id="location" placeholder="e.g., India" />
+            <button id="update-location">Update Location</button>
         </div>
         
-        <div id="date-weather" aria-label="Date and Weather Information">
+        <div id="date-weather">
             <p id="date"></p>
             <p id="weather">Weather: <span id="weather-status">Loading...</span></p>
         </div>
         
-        <button id="mode-toggle" class="toggle-btn" aria-label="Switch between dark and light modes" role="button">Switch Mode</button>
+        <button id="mode-toggle" class="toggle-btn">Switch Mode</button>
         
-        <button id="clock-toggle" class="toggle-btn" aria-label="Switch between digital and analog clocks" role="button">Toggle Clock Type</button>
+        <button id="clock-toggle" class="toggle-btn">Toggle Clock Type</button>
     </div>
     
     <script src="script.js"></script>
