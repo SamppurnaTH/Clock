@@ -91,18 +91,19 @@ body.dark-mode {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
-.number1  { top: 10%; left: 70%; }
-.number2  { top: 25%; left: 85%; }
-.number3  { top: 50%; left: 90%; transform: translateY(-50%); }
-.number4  { top: 70%; left: 82%; }
-.number5  { top: 85%; left: 68%; }
-.number6  { top: 90%; left: 50%; transform: translateX(-50%); }
-.number7  { top: 86%; left: 25%; }
-.number8  { top: 70%; left: 6%; }
-.number9  { top: 50%; right: 91%; transform: translateY(-50%); }
-.number10 { top: 25%; left: 6%; }
-.number11 { top: 6%; left: 25%; }
-.number12 { top: 3%; left: 50%; transform: translateX(-50%); }
+.number12 { top: 5%; left: 50%; transform: translateX(-50%); } /* 12 is at the top */
+.number1  { top: 14%; left: 73%; transform: translate(-50%, -50%); } /* 30 degrees */
+.number2  { top: 30%; left: 85%; transform: translate(-50%, -50%); } /* 60 degrees */
+.number3  { top: 50%; left: 90%; transform: translate(-50%, -50%); } /* 90 degrees (right) */
+.number4  { top: 70%; left: 85%; transform: translate(-50%, -50%); } /* 120 degrees */
+.number5  { top: 85%; left: 73%; transform: translate(-50%, -50%); } /* 150 degrees */
+.number6  { top: 90%; left: 50%; transform: translateX(-50%); } /* 180 degrees (bottom) */
+.number7  { top: 85%; left: 27%; transform: translate(-50%, -50%); } /* 210 degrees */
+.number8  { top: 70%; left: 15%; transform: translate(-50%, -50%); } /* 240 degrees */
+.number9  { top: 50%; left: 10%; transform: translate(-50%, -50%); } /* 270 degrees (left) */
+.number10 { top: 30%; left: 15%; transform: translate(-50%, -50%); } /* 300 degrees */
+.number11 { top: 14%; left: 27%; transform: translate(-50%, -50%); } /* 330 degrees */
+
 
 .center {
   width: 15px;

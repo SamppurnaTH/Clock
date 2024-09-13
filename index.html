@@ -39,16 +39,26 @@
         
         <div id="time-format-section" aria-label="Time Format Options">
             <label for="time-format">Choose Time Format:</label>
-            <select id="time-format">
+            <select id="time-format" aria-label="Time Format Selector">
                 <option value="12hr" selected>12-Hour</option>
                 <option value="24hr">24-Hour</option>
             </select>
         </div>
         
+        <div id="timezone-section" aria-label="Time Zone Selector">
+            <label for="time-zone">Choose Time Zone:</label>
+            <select id="time-zone" aria-label="Time Zone Selector">
+                <option value="Asia/Kolkata" selected>Asia/Kolkata</option>
+                <option value="America/New_York">America/New_York</option>
+                <option value="Europe/London">Europe/London</option>
+                <!-- Add more time zones as needed -->
+            </select>
+        </div>
+
         <div id="location-section" aria-label="Location Input">
             <label for="location">Enter Location:</label>
             <input type="text" id="location" placeholder="e.g., India" aria-label="Location Input Field" />
-            <button id="update-location">Update Location</button>
+            <button id="update-location" aria-label="Update Weather Location">Update Location</button>
         </div>
         
         <div id="date-weather" aria-label="Date and Weather Information">

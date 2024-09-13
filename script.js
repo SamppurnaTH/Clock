@@ -5,64 +5,70 @@ const timeDisplay = document.getElementById('time');
 const dateDisplay = document.getElementById('date');
 const modeToggle = document.getElementById('mode-toggle');
 const timeFormatSelect = document.getElementById('time-format');
+const timeZoneSelect = document.getElementById('time-zone'); // Time zone select element
 const clockToggle = document.getElementById('clock-toggle');
 const body = document.body;
 const weatherStatus = document.getElementById('weather-status');
 const locationInput = document.getElementById('location');
 const updateLocationButton = document.getElementById('update-location');
-
-// Configuration
 const weatherAPIKey = '9d0a72b537fe4190aec125333241209';
 let weatherAPIURL = `https://api.weatherapi.com/v1/current.json?q=India&key=${weatherAPIKey}`; // Default location
 
-let is24HourFormat = false; // Default to 12-hour format
-let isAnalogMode = false; // Default is digital clock
+let is24HourFormat = false;
+let isAnalogMode = false;
+let timeZone = 'Asia/Kolkata'; // Default time zone
 
-// Function to update the analog clock
-function updateAnalogClock() {
-    const now = new Date();
-    const seconds = now.getSeconds();
-    const minutes = now.getMinutes();
-    let hours = now.getHours();
-    
+// Function to update both digital and analog clocks with the same time in the selected time zone
+function updateClocks() {
+    const now = new Date().toLocaleString('en-US', { timeZone: timeZone });
+    const selectedTime = new Date(now);
+
+    // Update Digital Clock
+    let hours = selectedTime.getHours();
+    const minutes = selectedTime.getMinutes();
+    const seconds = selectedTime.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+
+    // For 12-hour format, adjust hours
+    const displayHours = is24HourFormat ? hours : hours % 12 || 12;
+    const time = `${displayHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${!is24HourFormat ? ampm : ''}`;
+    timeDisplay.textContent = time;
+
+    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: timeZone };
+    dateDisplay.textContent = selectedTime.toLocaleDateString(undefined, dateOptions);
+
+    // Update Analog Clock
+    updateAnalogClock(selectedTime);
+}
+
+// Function to update the analog clock hands based on the current time
+function updateAnalogClock(time) {
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.minute-hand');
     const hourHand = document.querySelector('.hour-hand');
-    
-    const secondsDegrees = ((seconds / 60) * 360) + 90;
+
+    const seconds = time.getSeconds();
+    const minutes = time.getMinutes();
+    let hours = time.getHours();
+
+    // Always use 12-hour format for analog clock
+    hours = hours % 12 || 12; // Convert 24-hour format to 12-hour format
+
+    // Calculate degrees for clock hands
+    const secondsDegrees = ((seconds / 60) * 360) + 90; // +90 to account for initial offset
     const minutesDegrees = ((minutes / 60) * 360) + 90;
-    const hoursDegrees = ((hours % 12) / 12) * 360 + ((minutes / 60) * 30) + 90;
-    
+    const hoursDegrees = ((hours / 12) * 360) + ((minutes / 60) * 30) + 90; // Hour needs minute offset
+
+    // Apply rotation to the clock hands
     secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
     minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
     hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-    
-    if (seconds === 0) {
-        secondHand.style.transition = 'none';
-    } else {
-        secondHand.style.transition = 'transform 0.05s cubic-bezier(0.4, 0, 0.2, 1)';
-    }
+
+    // Smooth transition for second hand except at 0 seconds
+    secondHand.style.transition = seconds === 0 ? 'none' : 'transform 0.05s cubic-bezier(0.4, 0, 0.2, 1)';
 }
 
-// Function to update the digital clock
-function updateDigitalClock() {
-    const now = new Date();
-    let hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-
-    if (!is24HourFormat) {
-        hours = hours % 12 || 12;
-    }
-
-    const time = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    timeDisplay.textContent = time;
-    
-    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateDisplay.textContent = now.toLocaleDateString(undefined, dateOptions); 
-}
-
-// Fetch and display weather data
+// Fetch weather data from the API
 async function fetchWeatherData() {
     try {
         const response = await fetch(weatherAPIURL);
@@ -70,8 +76,6 @@ async function fetchWeatherData() {
             throw new Error('Network response was not ok ' + response.statusText);
         }
         const data = await response.json();
-        
-        // Extract weather information from the response
         const condition = data.current.condition.text;
         const temperature = data.current.temp_c;
         const location = data.location.name;
@@ -89,31 +93,32 @@ function updateWeatherLocation() {
     const location = locationInput.value.trim();
     if (location) {
         weatherAPIURL = `https://api.weatherapi.com/v1/current.json?q=${encodeURIComponent(location)}&key=${weatherAPIKey}`;
-        fetchWeatherData(); // Fetch new weather data
+        fetchWeatherData(); 
     }
 }
 
-// Switch between analog and digital clocks
+// Event listeners
 clockToggle.addEventListener('click', () => {
     isAnalogMode = !isAnalogMode;
     analogClock.classList.toggle('hidden', !isAnalogMode);
     digitalClock.classList.toggle('hidden', isAnalogMode);
 });
 
-// Toggle between 12-hour and 24-hour format
 timeFormatSelect.addEventListener('change', (event) => {
     is24HourFormat = event.target.value === '24hr';
-    updateDigitalClock();
+    updateClocks();
 });
 
-// Toggle dark mode
+timeZoneSelect.addEventListener('change', (event) => {
+    timeZone = event.target.value;
+    updateClocks();
+});
+
 modeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
-    // Smooth transition for dark mode
     body.style.transition = 'background 0.3s ease, color 0.3s ease';
 });
 
-// Detect and apply system's dark mode preference
 function applyDarkModePreference() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         body.classList.add('dark-mode');
@@ -122,21 +127,19 @@ function applyDarkModePreference() {
     }
 }
 
-// Listen for system dark mode changes
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyDarkModePreference);
 
-// Update both clocks every second
-setInterval(() => {
-    if (isAnalogMode) {
-        updateAnalogClock();
-    }
-    updateDigitalClock();
-}, 1000);
+setInterval(updateClocks, 1000); // Update both clocks every second
 
-// Event listener for updating weather location
 updateLocationButton.addEventListener('click', updateWeatherLocation);
 
-// Debounce function for user input
+const debouncedUpdateWeatherLocation = debounce(updateWeatherLocation, 500);
+locationInput.addEventListener('input', debouncedUpdateWeatherLocation);
+
+fetchWeatherData();
+applyDarkModePreference();
+
+// Debounce utility function
 function debounce(func, delay) {
     let timeout;
     return function(...args) {
@@ -144,11 +147,3 @@ function debounce(func, delay) {
         timeout = setTimeout(() => func.apply(this, args), delay);
     };
 }
-
-// Debounce location input
-const debouncedUpdateWeatherLocation = debounce(updateWeatherLocation, 500);
-locationInput.addEventListener('input', debouncedUpdateWeatherLocation);
-
-// Initial setup
-fetchWeatherData();
-applyDarkModePreference();
